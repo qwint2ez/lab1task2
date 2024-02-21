@@ -1,13 +1,16 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "rectangle.h"
-#include <QInputDialog>
+#include <QMouseEvent>
+#include <QGraphicsRectItem>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , m_mousePressed(false)
+    , rectangle(nullptr)
 {
     ui->setupUi(this);
+    ui->graphicsView->setScene(new QGraphicsScene(this));
 }
 
 MainWindow::~MainWindow()
@@ -17,21 +20,27 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_rectangle_clicked()
 {
-    bool ok;
-    int width = QInputDialog::getInt(this, tr("Введите ширину"),
-                                     tr("Ширина:"), 100, 0, 1000, 1, &ok);
-    int height = QInputDialog::getInt(this, tr("Введите высоту"),
-                                      tr("Высота:"), 200, 0, 1000, 1, &ok);
+    m_mousePressed = true;
+}
 
-    if (ok) {
-        QGraphicsScene *scene = new QGraphicsScene(this);
-
-        Rectangle rect(width, height);
-        QGraphicsRectItem *rectangle = rect.getRectangle();
-
-        scene->addItem(rectangle);
-
-        ui->graphicsView->setScene(scene);
-        ui->graphicsView->centerOn(rectangle);
+void MainWindow::mousePressEvent(QMouseEvent *event)
+{
+    if (m_mousePressed) {
+        m_origin = event->pos();
+        rectangle = new QGraphicsRectItem(QRect(m_origin, QSize()));
+        ui->graphicsView->scene()->addItem(rectangle);
     }
+}
+
+void MainWindow::mouseMoveEvent(QMouseEvent *event)
+{
+    if (m_mousePressed) {
+        QRect rect(m_origin, event->pos());
+        rectangle->setRect(rect.normalized());
+    }
+}
+
+void MainWindow::mouseReleaseEvent(QMouseEvent *event)
+{
+    m_mousePressed = false;
 }

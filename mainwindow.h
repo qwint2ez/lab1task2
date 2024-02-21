@@ -22,7 +22,15 @@ public:
 private slots:
     void on_rectangle_clicked();
 
+protected:
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
+
 private:
     Ui::MainWindow *ui;
+    QPoint m_origin;
+    bool m_mousePressed;
+    QGraphicsRectItem *rectangle;
 };
 #endif // MAINWINDOW_H
