@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QGraphicsRectItem>
+#include <QMessageBox>
+#include "rectangle.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -21,16 +23,23 @@ public:
 
 private slots:
     void on_rectangle_clicked();
+    void on_calculate_clicked();
 
-protected:
-    void mousePressEvent(QMouseEvent *event) override;
-    void mouseMoveEvent(QMouseEvent *event) override;
-    void mouseReleaseEvent(QMouseEvent *event) override;
+    void on_turnclockwise_pressed();
+
+    void on_turncounterclockwise_pressed();
+
+    void on_turnclockwise_released();
+
+    void on_turncounterclockwise_released();
 
 private:
     Ui::MainWindow *ui;
-    QPoint m_origin;
-    bool m_mousePressed;
-    QGraphicsRectItem *rectangle;
+    int width;
+    int height;
+    Rectangle rect;
+    QGraphicsScene *scene;
+    QTimer *timerClockwise;
+    QTimer *timerCounterClockwise;
 };
 #endif // MAINWINDOW_H

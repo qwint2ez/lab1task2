@@ -27,27 +27,53 @@
      <string>rectangle</string>
     </property>
    </widget>
-   <widget class="MyGraphicsView" name="graphicsView" native="true">
+   <widget class="QGraphicsView" name="graphicsView">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>90</y>
-      <width>531</width>
-      <height>341</height>
+      <x>10</x>
+      <y>60</y>
+      <width>561</width>
+      <height>471</height>
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="calculate">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>10</y>
+      <x>600</x>
+      <y>60</y>
       <width>89</width>
-      <height>25</height>
+      <height>21</height>
      </rect>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string>calculate</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="turnclockwise">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>90</y>
+      <width>171</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>turn clockwise</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="turncounterclockwise">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>120</y>
+      <width>171</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>turn counterclockwise</string>
     </property>
    </widget>
   </widget>
@@ -63,13 +89,6 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>MyGraphicsView</class>
-   <extends>QWidget</extends>
-   <header>mygraphicsview.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

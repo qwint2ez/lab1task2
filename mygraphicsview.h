@@ -2,7 +2,7 @@
 #define MYGRAPHICSVIEW_H
 
 #include <QGraphicsView>
-#include <QGraphicsRectItem>
+#include <QGraphicsRectItem> //i hope it works
 
 class MyGraphicsView : public QGraphicsView
 {
