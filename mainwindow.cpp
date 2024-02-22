@@ -1,19 +1,30 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QInputDialog>
-#include <QTimer> // Добавьте эту строку
+#include <QTimer>
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent) //i hope it works
+    : QMainWindow(parent)
     , ui(new Ui::MainWindow)
     , rect(0, 0)
 {
     ui->setupUi(this);
     timerClockwise = new QTimer(this);
     timerCounterClockwise = new QTimer(this);
+    timerScaleUp = new QTimer(this);
+    timerScaleDown = new QTimer(this);
+
     connect(timerClockwise, &QTimer::timeout, this, &MainWindow::on_turnclockwise_pressed);
     connect(timerCounterClockwise, &QTimer::timeout, this, &MainWindow::on_turncounterclockwise_pressed);
+    connect(timerScaleUp, &QTimer::timeout, this, &MainWindow::on_scaleUpButton_pressed);
+    connect(timerScaleDown, &QTimer::timeout, this, &MainWindow::on_scaleDownButton_pressed);
+
+    connect(ui->scaleUpButton, &QPushButton::pressed, timerScaleUp, QOverload<>::of(&QTimer::start));
+    connect(ui->scaleUpButton, &QPushButton::released, timerScaleUp, &QTimer::stop);
+    connect(ui->scaleDownButton, &QPushButton::pressed, timerScaleDown, QOverload<>::of(&QTimer::start));
+    connect(ui->scaleDownButton, &QPushButton::released, timerScaleDown, &QTimer::stop);
 }
+
 
 MainWindow::~MainWindow()
 {
@@ -95,4 +106,41 @@ void MainWindow::on_moveCenterButton_clicked()
         rect.getCenterOfMass()->moveBy(delta.x(), delta.y());
     }
 }
+
+
+void MainWindow::on_scaleUpButton_pressed()
+{
+    timerScaleUp->start(10);
+    qreal currentScale = this->rect.getRectangle()->scale();
+    this->rect.getRectangle()->setScale(currentScale * 1.01);
+
+    // TYTA YA OBNOVLYAU PLOWADI I TD
+    // qreal newArea = this->rect.getRectangle()->area() * 1.01 * 1.01;
+    // qreal newPerimeter = this->rect.getRectangle()->perimeter() * 1.01;
+    // this->rect.getRectangle()->setArea(newArea);
+    // this->rect.getRectangle()->setPerimeter(newPerimeter);
+}
+
+void MainWindow::on_scaleUpButton_released()
+{
+    timerScaleUp->stop();
+}
+
+void MainWindow::on_scaleDownButton_pressed()
+{
+    timerScaleDown->start(10);
+    qreal currentScale = this->rect.getRectangle()->scale();
+    this->rect.getRectangle()->setScale(currentScale / 1.01);
+
+    // TYTA YA OBNOVLYAU PLOWADI I TD
+    // qreal newArea = this->rect.getRectangle()->area() / (1.01 * 1.01);
+    // qreal newPerimeter = this->rect.getRectangle()->perimeter() / 1.01;
+    // this->rect.getRectangle()->setArea(newArea);
+    // this->rect.getRectangle()->setPerimeter(newPerimeter);
+}
+void MainWindow::on_scaleDownButton_released()
+{
+    timerScaleDown->stop();
+}
+
 

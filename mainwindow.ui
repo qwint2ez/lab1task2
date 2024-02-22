@@ -89,6 +89,32 @@
      <string>edit center of mass</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="scaleUpButton">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>180</y>
+      <width>171</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>scaleUpButton</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="scaleDownButton">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>210</y>
+      <width>171</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>scaleDownButton</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

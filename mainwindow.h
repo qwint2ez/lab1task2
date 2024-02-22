@@ -23,6 +23,7 @@ public:
 
 private slots:
     void on_rectangle_clicked();
+
     void on_calculate_clicked();
 
     void on_turnclockwise_pressed();
@@ -35,6 +36,14 @@ private slots:
 
     void on_moveCenterButton_clicked();
 
+    void on_scaleUpButton_pressed();
+
+    void on_scaleUpButton_released();
+
+    void on_scaleDownButton_pressed();
+
+    void on_scaleDownButton_released();
+
 private:
     Ui::MainWindow *ui;
     int width;
@@ -43,5 +52,7 @@ private:
     QGraphicsScene *scene;
     QTimer *timerClockwise;
     QTimer *timerCounterClockwise;
+    QTimer *timerScaleUp;
+    QTimer *timerScaleDown;
 };
 #endif // MAINWINDOW_H
