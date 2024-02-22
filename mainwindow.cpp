@@ -113,12 +113,6 @@ void MainWindow::on_scaleUpButton_pressed()
     timerScaleUp->start(10);
     qreal currentScale = this->rect.getRectangle()->scale();
     this->rect.getRectangle()->setScale(currentScale * 1.01);
-
-    // TYTA YA OBNOVLYAU PLOWADI I TD
-    // qreal newArea = this->rect.getRectangle()->area() * 1.01 * 1.01;
-    // qreal newPerimeter = this->rect.getRectangle()->perimeter() * 1.01;
-    // this->rect.getRectangle()->setArea(newArea);
-    // this->rect.getRectangle()->setPerimeter(newPerimeter);
 }
 
 void MainWindow::on_scaleUpButton_released()
@@ -132,11 +126,6 @@ void MainWindow::on_scaleDownButton_pressed()
     qreal currentScale = this->rect.getRectangle()->scale();
     this->rect.getRectangle()->setScale(currentScale / 1.01);
 
-    // TYTA YA OBNOVLYAU PLOWADI I TD
-    // qreal newArea = this->rect.getRectangle()->area() / (1.01 * 1.01);
-    // qreal newPerimeter = this->rect.getRectangle()->perimeter() / 1.01;
-    // this->rect.getRectangle()->setArea(newArea);
-    // this->rect.getRectangle()->setPerimeter(newPerimeter);
 }
 void MainWindow::on_scaleDownButton_released()
 {
