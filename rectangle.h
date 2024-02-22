@@ -1,4 +1,3 @@
-// Ваш класс Rectangle
 #ifndef RECTANGLE_H
 #define RECTANGLE_H
 
@@ -12,6 +11,8 @@ public:
 
     QGraphicsRectItem* getRectangle();
     QGraphicsEllipseItem* getCenterOfMass();
+    void moveCenterOfMass(double dx, double dy);
+
 private:
     QGraphicsRectItem *rectangle;
     QGraphicsEllipseItem *centerOfMass;

@@ -20,3 +20,9 @@ QGraphicsEllipseItem* Rectangle::getCenterOfMass()
 {
     return centerOfMass;
 }
+
+void Rectangle::moveCenterOfMass(double dx, double dy)
+{
+    rectangle->moveBy(dx, dy);
+    centerOfMass->moveBy(dx, dy);
+}

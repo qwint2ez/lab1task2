@@ -33,6 +33,8 @@ private slots:
 
     void on_turncounterclockwise_released();
 
+    void on_moveCenterButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     int width;

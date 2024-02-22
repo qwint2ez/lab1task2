@@ -78,3 +78,21 @@ void MainWindow::on_turncounterclockwise_released()
 {
     timerCounterClockwise->stop();
 }
+
+void MainWindow::on_moveCenterButton_clicked()
+{
+    bool ok;
+    double newX = QInputDialog::getDouble(this, tr("Введите новую координату X центра масс"),
+                                          tr("X:"), 0, -1000, 1000, 2, &ok);
+    double newY = QInputDialog::getDouble(this, tr("Введите новую координату Y центра масс"),
+                                          tr("Y:"), 0, -1000, 1000, 2, &ok);
+
+    if (ok) {
+        QPointF oldCenter = rect.getCenterOfMass()->scenePos();
+        QPointF delta = QPointF(newX, newY) - oldCenter;
+
+        rect.getRectangle()->moveBy(delta.x(), delta.y());
+        rect.getCenterOfMass()->moveBy(delta.x(), delta.y());
+    }
+}
+

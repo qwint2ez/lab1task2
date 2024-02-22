@@ -11,12 +11,10 @@ CONFIG += c++17
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    mygraphicsview.cpp \
     rectangle.cpp
 
 HEADERS += \
     mainwindow.h \
-    mygraphicsview.h \
     rectangle.h
 
 FORMS += \
