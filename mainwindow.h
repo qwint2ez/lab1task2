@@ -44,6 +44,22 @@ private slots:
 
     void on_scaleDownButton_released();
 
+    void on_moveup_pressed();
+
+    void on_moveup_released();
+
+    void on_moveleft_pressed();
+
+    void on_moveleft_released();
+
+    void on_moveright_pressed();
+
+    void on_moveright_released();
+
+    void on_movedown_pressed();
+
+    void on_movedown_released();
+
 private:
     Ui::MainWindow *ui;
     int width;
@@ -54,5 +70,6 @@ private:
     QTimer *timerCounterClockwise;
     QTimer *timerScaleUp;
     QTimer *timerScaleDown;
+    QTimer *timerMoveUp;
 };
 #endif // MAINWINDOW_H

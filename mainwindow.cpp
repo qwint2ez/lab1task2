@@ -13,16 +13,20 @@ MainWindow::MainWindow(QWidget *parent)
     timerCounterClockwise = new QTimer(this);
     timerScaleUp = new QTimer(this);
     timerScaleDown = new QTimer(this);
+    //timerMoveUp = new QTimer(this);
 
     connect(timerClockwise, &QTimer::timeout, this, &MainWindow::on_turnclockwise_pressed);
     connect(timerCounterClockwise, &QTimer::timeout, this, &MainWindow::on_turncounterclockwise_pressed);
     connect(timerScaleUp, &QTimer::timeout, this, &MainWindow::on_scaleUpButton_pressed);
     connect(timerScaleDown, &QTimer::timeout, this, &MainWindow::on_scaleDownButton_pressed);
+    //connect(timerMoveUp, &QTimer::timeout, this, &MainWindow::on_moveup_pressed);
 
     connect(ui->scaleUpButton, &QPushButton::pressed, timerScaleUp, QOverload<>::of(&QTimer::start));
     connect(ui->scaleUpButton, &QPushButton::released, timerScaleUp, &QTimer::stop);
     connect(ui->scaleDownButton, &QPushButton::pressed, timerScaleDown, QOverload<>::of(&QTimer::start));
     connect(ui->scaleDownButton, &QPushButton::released, timerScaleDown, &QTimer::stop);
+    //connect(ui->moveup, &QPushButton::released, timerMoveUp, &QTimer::stop);
+
 }
 
 
@@ -113,6 +117,8 @@ void MainWindow::on_scaleUpButton_pressed()
     timerScaleUp->start(10);
     qreal currentScale = this->rect.getRectangle()->scale();
     this->rect.getRectangle()->setScale(currentScale * 1.01);
+    width = width * 1.01;
+    height = height * 1.01;
 }
 
 void MainWindow::on_scaleUpButton_released()
@@ -125,6 +131,8 @@ void MainWindow::on_scaleDownButton_pressed()
     timerScaleDown->start(10);
     qreal currentScale = this->rect.getRectangle()->scale();
     this->rect.getRectangle()->setScale(currentScale / 1.01);
+    width = width / 1.01;
+    height = height / 1.01;
 
 }
 void MainWindow::on_scaleDownButton_released()
@@ -132,4 +140,54 @@ void MainWindow::on_scaleDownButton_released()
     timerScaleDown->stop();
 }
 
+
+
+// void MainWindow::on_moveup_pressed()
+// {
+//     timerMoveUp->start(10);
+//     rect.getRectangle()->moveBy(1, 0);
+//     rect.getCenterOfMass()->moveBy(1, 0);
+// }
+
+
+// void MainWindow::on_moveup_released()
+// {
+//     timerMoveUp->stop();
+// }
+
+
+// void MainWindow::on_moveleft_pressed()
+// {
+
+// }
+
+
+// void MainWindow::on_moveleft_released()
+// {
+
+// }
+
+
+// void MainWindow::on_moveright_pressed()
+// {
+
+// }
+
+
+// void MainWindow::on_moveright_released()
+// {
+
+// }
+
+
+// void MainWindow::on_movedown_pressed()
+// {
+
+// }
+
+
+// void MainWindow::on_movedown_released()
+// {
+
+// }
 
