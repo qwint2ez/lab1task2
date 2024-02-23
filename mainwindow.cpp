@@ -142,52 +142,52 @@ void MainWindow::on_scaleDownButton_released()
 
 
 
-// void MainWindow::on_moveup_pressed()
-// {
-//     timerMoveUp->start(10);
-//     rect.getRectangle()->moveBy(1, 0);
-//     rect.getCenterOfMass()->moveBy(1, 0);
-// }
+void MainWindow::on_moveup_pressed()
+{
+    timerMoveUp->start(10);
+    rect.getRectangle()->moveBy(1, 0);
+    rect.getCenterOfMass()->moveBy(1, 0);
+}
 
 
-// void MainWindow::on_moveup_released()
-// {
-//     timerMoveUp->stop();
-// }
+void MainWindow::on_moveup_released()
+{
+    timerMoveUp->stop();
+}
 
 
-// void MainWindow::on_moveleft_pressed()
-// {
+void MainWindow::on_moveleft_pressed()
+{
 
-// }
-
-
-// void MainWindow::on_moveleft_released()
-// {
-
-// }
+}
 
 
-// void MainWindow::on_moveright_pressed()
-// {
+void MainWindow::on_moveleft_released()
+{
 
-// }
-
-
-// void MainWindow::on_moveright_released()
-// {
-
-// }
+}
 
 
-// void MainWindow::on_movedown_pressed()
-// {
+void MainWindow::on_moveright_pressed()
+{
 
-// }
+}
 
 
-// void MainWindow::on_movedown_released()
-// {
+void MainWindow::on_moveright_released()
+{
 
-// }
+}
+
+
+void MainWindow::on_movedown_pressed()
+{
+
+}
+
+
+void MainWindow::on_movedown_released()
+{
+
+}
 
