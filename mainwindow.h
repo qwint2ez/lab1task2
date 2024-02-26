@@ -71,5 +71,8 @@ private:
     QTimer *timerScaleUp;
     QTimer *timerScaleDown;
     QTimer *timerMoveUp;
+    QTimer *timerMoveDown;
+    QTimer *timerMoveRight;
+    QTimer *timerMoveLeft;
 };
 #endif // MAINWINDOW_H

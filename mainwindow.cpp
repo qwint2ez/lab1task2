@@ -13,19 +13,28 @@ MainWindow::MainWindow(QWidget *parent)
     timerCounterClockwise = new QTimer(this);
     timerScaleUp = new QTimer(this);
     timerScaleDown = new QTimer(this);
-    //timerMoveUp = new QTimer(this);
+    timerMoveUp = new QTimer(this);
+    timerMoveLeft = new QTimer(this);
+    timerMoveRight = new QTimer(this);
+    timerMoveDown = new QTimer(this);
 
     connect(timerClockwise, &QTimer::timeout, this, &MainWindow::on_turnclockwise_pressed);
     connect(timerCounterClockwise, &QTimer::timeout, this, &MainWindow::on_turncounterclockwise_pressed);
     connect(timerScaleUp, &QTimer::timeout, this, &MainWindow::on_scaleUpButton_pressed);
     connect(timerScaleDown, &QTimer::timeout, this, &MainWindow::on_scaleDownButton_pressed);
-    //connect(timerMoveUp, &QTimer::timeout, this, &MainWindow::on_moveup_pressed);
+    connect(timerMoveUp, &QTimer::timeout, this, &MainWindow::on_moveup_pressed);
+     connect(timerMoveLeft, &QTimer::timeout, this, &MainWindow::on_moveleft_pressed);
+      connect(timerMoveRight, &QTimer::timeout, this, &MainWindow::on_moveright_pressed);
+       connect(timerMoveDown, &QTimer::timeout, this, &MainWindow::on_movedown_pressed);
 
     connect(ui->scaleUpButton, &QPushButton::pressed, timerScaleUp, QOverload<>::of(&QTimer::start));
     connect(ui->scaleUpButton, &QPushButton::released, timerScaleUp, &QTimer::stop);
     connect(ui->scaleDownButton, &QPushButton::pressed, timerScaleDown, QOverload<>::of(&QTimer::start));
     connect(ui->scaleDownButton, &QPushButton::released, timerScaleDown, &QTimer::stop);
-    //connect(ui->moveup, &QPushButton::released, timerMoveUp, &QTimer::stop);
+    connect(ui->moveup, &QPushButton::released, timerMoveUp, &QTimer::stop);
+     connect(ui->moveleft, &QPushButton::released, timerMoveLeft, &QTimer::stop);
+      connect(ui->moveright, &QPushButton::released, timerMoveRight, &QTimer::stop);
+       connect(ui->movedown, &QPushButton::released, timerMoveDown, &QTimer::stop);
 
 }
 
@@ -145,8 +154,8 @@ void MainWindow::on_scaleDownButton_released()
 void MainWindow::on_moveup_pressed()
 {
     timerMoveUp->start(10);
-    rect.getRectangle()->moveBy(1, 0);
-    rect.getCenterOfMass()->moveBy(1, 0);
+    rect.getRectangle()->moveBy(0, -1);
+    rect.getCenterOfMass()->moveBy(0, -1);
 }
 
 
@@ -158,36 +167,42 @@ void MainWindow::on_moveup_released()
 
 void MainWindow::on_moveleft_pressed()
 {
-
+    timerMoveLeft->start(10);
+    rect.getRectangle()->moveBy(-1, 0);
+    rect.getCenterOfMass()->moveBy(-1, 0);
 }
 
 
 void MainWindow::on_moveleft_released()
 {
-
+timerMoveLeft->stop();
 }
 
 
 void MainWindow::on_moveright_pressed()
 {
-
+    timerMoveRight->start(10);
+    rect.getRectangle()->moveBy(1, 0);
+    rect.getCenterOfMass()->moveBy(1, 0);
 }
 
 
 void MainWindow::on_moveright_released()
 {
-
+timerMoveRight->stop();
 }
 
 
 void MainWindow::on_movedown_pressed()
 {
-
+    timerMoveDown->start(10);
+    rect.getRectangle()->moveBy(0, 1);
+    rect.getCenterOfMass()->moveBy(0, 1);
 }
 
 
 void MainWindow::on_movedown_released()
 {
-
+timerMoveDown->stop();
 }
 
