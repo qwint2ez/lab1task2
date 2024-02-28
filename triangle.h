@@ -1,23 +1,22 @@
-#ifndef RECTANGLE_H
-#define RECTANGLE_H
+#ifndef TRIANGLE_H
+#define TRIANGLE_H
 
-#include <QGraphicsRectItem>
+#include <QGraphicsPolygonItem>
 #include <QGraphicsEllipseItem>
 
-class Rectangle
+class Triangle
 {
 public:
-    Rectangle(int width, int height);
+    Triangle(int side);
 
-    QGraphicsRectItem* getRectangle();
+    QGraphicsPolygonItem* getTriangle();
     QGraphicsEllipseItem* getCenterOfMass();
     void moveCenterOfMass(double dx, double dy);
     void scale(double factor);
 
 private:
-    QGraphicsRectItem *rectangle;
+    QGraphicsPolygonItem *triangle;
     QGraphicsEllipseItem *centerOfMass;
 };
 
-
-#endif // RECTANGLE_H
+#endif // TRIANGLE_H

@@ -6,6 +6,7 @@
 #include <QGraphicsRectItem>
 #include <QMessageBox>
 #include "rectangle.h"
+#include "triangle.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -63,11 +64,15 @@ private slots:
 
     void on_movedown_released();
 
+    void on_triangle_clicked();
+
 private:
     Ui::MainWindow *ui;
-    int width;
-    int height;
-    Rectangle rect;
+    double width;
+    double height;
+    double side;
+    Rectangle* rect;
+    Triangle* tri;
     QGraphicsScene *scene;
     QTimer *timerClockwise;
     QTimer *timerCounterClockwise;
