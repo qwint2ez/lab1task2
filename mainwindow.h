@@ -21,6 +21,9 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+public slots:
+    void updateCenterOfMass(double x, double y);
+
 private slots:
     void on_rectangle_clicked();
 
@@ -74,5 +77,7 @@ private:
     QTimer *timerMoveDown;
     QTimer *timerMoveRight;
     QTimer *timerMoveLeft;
+    QLabel* xLabel;
+    QLabel* yLabel;
 };
 #endif // MAINWINDOW_H

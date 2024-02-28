@@ -36,6 +36,9 @@ MainWindow::MainWindow(QWidget *parent)
       connect(ui->moveright, &QPushButton::released, timerMoveRight, &QTimer::stop);
        connect(ui->movedown, &QPushButton::released, timerMoveDown, &QTimer::stop);
 
+      xLabel = ui->xLabel;
+      yLabel = ui->yLabel;
+
 }
 
 
@@ -77,6 +80,11 @@ void MainWindow::on_calculate_clicked()
 
     QGraphicsEllipseItem *centerOfMass = this->rect.getCenterOfMass();
     this->scene->addItem(centerOfMass);
+
+    QPointF center = rect.getCenterOfMass()->scenePos();
+
+    xLabel->setText(tr("X: ") + QString::number(center.x()));
+    yLabel->setText(tr("Y: ") + QString::number(center.y()));
 }
 
 void MainWindow::on_turnclockwise_pressed()
@@ -84,6 +92,7 @@ void MainWindow::on_turnclockwise_pressed()
      timerClockwise->start(10);
     qreal currentRotation = this->rect.getRectangle()->rotation();
     this->rect.getRectangle()->setRotation(currentRotation - 1);
+
 }
 
 void MainWindow::on_turnclockwise_released()
@@ -117,8 +126,14 @@ void MainWindow::on_moveCenterButton_clicked()
 
         rect.getRectangle()->moveBy(delta.x(), delta.y());
         rect.getCenterOfMass()->moveBy(delta.x(), delta.y());
+
+        QPointF center = rect.getCenterOfMass()->scenePos();
+
+        xLabel->setText(tr("X: ") + QString::number(center.x()));
+        yLabel->setText(tr("Y: ") + QString::number(center.y()));
     }
 }
+
 
 
 void MainWindow::on_scaleUpButton_pressed()
@@ -156,6 +171,11 @@ void MainWindow::on_moveup_pressed()
     timerMoveUp->start(10);
     rect.getRectangle()->moveBy(0, -1);
     rect.getCenterOfMass()->moveBy(0, -1);
+
+    QPointF center = rect.getCenterOfMass()->scenePos();
+
+    xLabel->setText(tr("X: ") + QString::number(center.x()));
+    yLabel->setText(tr("Y: ") + QString::number(center.y()));
 }
 
 
@@ -170,6 +190,11 @@ void MainWindow::on_moveleft_pressed()
     timerMoveLeft->start(10);
     rect.getRectangle()->moveBy(-1, 0);
     rect.getCenterOfMass()->moveBy(-1, 0);
+
+    QPointF center = rect.getCenterOfMass()->scenePos();
+
+    xLabel->setText(tr("X: ") + QString::number(center.x()));
+    yLabel->setText(tr("Y: ") + QString::number(center.y()));
 }
 
 
@@ -184,6 +209,11 @@ void MainWindow::on_moveright_pressed()
     timerMoveRight->start(10);
     rect.getRectangle()->moveBy(1, 0);
     rect.getCenterOfMass()->moveBy(1, 0);
+
+    QPointF center = rect.getCenterOfMass()->scenePos();
+
+    xLabel->setText(tr("X: ") + QString::number(center.x()));
+    yLabel->setText(tr("Y: ") + QString::number(center.y()));
 }
 
 
@@ -198,6 +228,11 @@ void MainWindow::on_movedown_pressed()
     timerMoveDown->start(10);
     rect.getRectangle()->moveBy(0, 1);
     rect.getCenterOfMass()->moveBy(0, 1);
+
+    QPointF center = rect.getCenterOfMass()->scenePos();
+
+    xLabel->setText(tr("X: ") + QString::number(center.x()));
+    yLabel->setText(tr("Y: ") + QString::number(center.y()));
 }
 
 
