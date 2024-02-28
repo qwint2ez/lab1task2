@@ -68,6 +68,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    Shape *currentShape;
     double width;
     double height;
     double side;

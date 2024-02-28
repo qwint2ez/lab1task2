@@ -17,6 +17,7 @@ SOURCES += \
 HEADERS += \
     mainwindow.h \
     rectangle.h \
+    shape.h \
     triangle.h
 
 FORMS += \

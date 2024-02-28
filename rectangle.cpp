@@ -2,6 +2,7 @@
 #include <QBrush>
 
 Rectangle::Rectangle(int width, int height)
+    : width(width), height(height)
 {
     rectangle = new QGraphicsRectItem(0, 0, width, height);
     rectangle->setPos(-rectangle->rect().width()/2, -rectangle->rect().height()/2);
@@ -10,7 +11,7 @@ Rectangle::Rectangle(int width, int height)
     centerOfMass->setBrush(QBrush(Qt::red));
 }
 
-QGraphicsRectItem* Rectangle::getRectangle()
+QGraphicsRectItem* Rectangle::getItem()
 {
     return rectangle;
 }
@@ -20,14 +21,12 @@ QGraphicsEllipseItem* Rectangle::getCenterOfMass()
     return centerOfMass;
 }
 
-void Rectangle::moveCenterOfMass(double dx, double dy)
+double Rectangle::getArea()
 {
-    rectangle->moveBy(dx, dy);
-    centerOfMass->moveBy(dx, dy);
+    return width * height;
 }
 
-void Rectangle::scale(double factor)
+double Rectangle::getPerimeter()
 {
-    rectangle->setScale(rectangle->scale() * factor);
-    centerOfMass->setScale(centerOfMass->scale() * factor);
+    return 2 * (width + height);
 }
