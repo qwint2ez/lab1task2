@@ -16,6 +16,7 @@ public:
     double getPerimeter() override;
     void moveCenterOfMass(double dx, double dy);
     void scale(double factor);
+    void setSide(int newSide) { side = newSide; }
 
 private:
     QGraphicsPolygonItem *triangle;

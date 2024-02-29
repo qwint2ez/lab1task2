@@ -18,8 +18,9 @@ Triangle::Triangle(int side)
     centerOfMass = new QGraphicsEllipseItem(0, 0, 10, 10);
     centerOfMass->setPos(centerX - centerX - 5, centerY - centerY - 5);
     centerOfMass->setBrush(QBrush(Qt::red));
-}
 
+    triangle->setTransformOriginPoint(centerX, centerY);
+}
 
 
 QGraphicsPolygonItem* Triangle::getItem()

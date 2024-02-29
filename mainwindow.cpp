@@ -100,10 +100,10 @@ void MainWindow::on_triangle_clicked()
         ui->graphicsView->setScene(scene);
         ui->graphicsView->centerOn(triangle);
 
-        QPointF center = rect->getCenterOfMass()->scenePos();
+        xLabel->setText(tr("X: -5 "));
+        yLabel->setText(tr("Y: -5 "));
 
-        xLabel->setText(tr("X: ") + QString::number(center.x()));
-        yLabel->setText(tr("Y: ") + QString::number(center.y()));
+
     }
 }
 
@@ -131,9 +131,8 @@ void MainWindow::on_calculate_clicked()
 void MainWindow::on_turnclockwise_pressed()
 {
     timerClockwise->start(10);
-    qreal currentRotation = this->rect->getItem()->rotation();
-    this->rect->getItem()->setRotation(currentRotation - 1);
-
+    qreal currentRotation = this->currentShape->getItem()->rotation();
+    this->currentShape->getItem()->setRotation(currentRotation - 1);
 }
 
 void MainWindow::on_turnclockwise_released()
@@ -144,14 +143,15 @@ void MainWindow::on_turnclockwise_released()
 void MainWindow::on_turncounterclockwise_pressed()
 {
     timerCounterClockwise->start(10);
-    qreal currentRotation = this->rect->getItem()->rotation();
-    this->rect->getItem()->setRotation(currentRotation + 1);
+    qreal currentRotation = this->currentShape->getItem()->rotation();
+    this->currentShape->getItem()->setRotation(currentRotation + 1);
 }
 
 void MainWindow::on_turncounterclockwise_released()
 {
     timerCounterClockwise->stop();
 }
+
 
 void MainWindow::on_moveCenterButton_clicked()
 {
@@ -162,13 +162,13 @@ void MainWindow::on_moveCenterButton_clicked()
                                           tr("Y:"), 0, -1000, 1000, 2, &ok);
 
     if (ok) {
-        QPointF oldCenter = rect->getCenterOfMass()->scenePos();
+        QPointF oldCenter = currentShape->getCenterOfMass()->scenePos();
         QPointF delta = QPointF(newX, newY) - oldCenter;
 
-        rect->getItem()->moveBy(delta.x(), delta.y());
-        rect->getCenterOfMass()->moveBy(delta.x(), delta.y());
+        currentShape->getItem()->moveBy(delta.x(), delta.y());
+        currentShape->getCenterOfMass()->moveBy(delta.x(), delta.y());
 
-        QPointF center = rect->getCenterOfMass()->scenePos();
+        QPointF center = currentShape->getCenterOfMass()->scenePos();
 
         xLabel->setText(tr("X: ") + QString::number(center.x()));
         yLabel->setText(tr("Y: ") + QString::number(center.y()));
@@ -178,10 +178,17 @@ void MainWindow::on_moveCenterButton_clicked()
 void MainWindow::on_scaleUpButton_pressed()
 {
     timerScaleUp->start(10);
-    qreal currentScale = this->rect->getItem()->scale();
-    this->rect->getItem()->setScale(currentScale * 1.01);
-    width = width * 1.01;
-    height = height * 1.01;
+    qreal currentScale = this->currentShape->getItem()->scale();
+    this->currentShape->getItem()->setScale(currentScale * 1.01);
+    if (Rectangle* rect = dynamic_cast<Rectangle*>(currentShape)) {
+        width = width * 1.01;
+        height = height * 1.01;
+        rect->setWidth(width);
+        rect->setHeight(height);
+    } else if (Triangle* tri = dynamic_cast<Triangle*>(currentShape)) {
+        side = side * 1.01;
+        tri->setSide(side);
+    }
 }
 
 void MainWindow::on_scaleUpButton_released()
@@ -192,10 +199,17 @@ void MainWindow::on_scaleUpButton_released()
 void MainWindow::on_scaleDownButton_pressed()
 {
     timerScaleDown->start(10);
-    qreal currentScale = this->rect->getItem()->scale();
-    this->rect->getItem()->setScale(currentScale / 1.01);
-    width = width / 1.01;
-    height = height / 1.01;
+    qreal currentScale = this->currentShape->getItem()->scale();
+    this->currentShape->getItem()->setScale(currentScale / 1.01);
+    if (Rectangle* rect = dynamic_cast<Rectangle*>(currentShape)) {
+        width = width / 1.01;
+        height = height / 1.01;
+        rect->setWidth(width);
+        rect->setHeight(height);
+    } else if (Triangle* tri = dynamic_cast<Triangle*>(currentShape)) {
+        side = side / 1.01;
+        tri->setSide(side);
+    }
 }
 
 void MainWindow::on_scaleDownButton_released()
@@ -208,10 +222,10 @@ void MainWindow::on_scaleDownButton_released()
 void MainWindow::on_moveup_pressed()
 {
     timerMoveUp->start(10);
-    rect->getItem()->moveBy(0, -1);
-    rect->getCenterOfMass()->moveBy(0, -1);
+    currentShape->getItem()->moveBy(0, -1);
+    currentShape->getCenterOfMass()->moveBy(0, -1);
 
-    QPointF center = rect->getCenterOfMass()->scenePos();
+    QPointF center = currentShape->getCenterOfMass()->scenePos();
 
     xLabel->setText(tr("X: ") + QString::number(center.x()));
     yLabel->setText(tr("Y: ") + QString::number(center.y()));
@@ -227,10 +241,10 @@ void MainWindow::on_moveup_released()
 void MainWindow::on_moveleft_pressed()
 {
     timerMoveLeft->start(10);
-    rect->getItem()->moveBy(-1, 0);
-    rect->getCenterOfMass()->moveBy(-1, 0);
+    currentShape->getItem()->moveBy(-1, 0);
+    currentShape->getCenterOfMass()->moveBy(-1, 0);
 
-    QPointF center = rect->getCenterOfMass()->scenePos();
+    QPointF center = currentShape->getCenterOfMass()->scenePos();
 
     xLabel->setText(tr("X: ") + QString::number(center.x()));
     yLabel->setText(tr("Y: ") + QString::number(center.y()));
@@ -246,10 +260,10 @@ timerMoveLeft->stop();
 void MainWindow::on_moveright_pressed()
 {
     timerMoveRight->start(10);
-    rect->getItem()->moveBy(1, 0);
-    rect->getCenterOfMass()->moveBy(1, 0);
+    currentShape->getItem()->moveBy(1, 0);
+    currentShape->getCenterOfMass()->moveBy(1, 0);
 
-    QPointF center = rect->getCenterOfMass()->scenePos();
+    QPointF center = currentShape->getCenterOfMass()->scenePos();
 
     xLabel->setText(tr("X: ") + QString::number(center.x()));
     yLabel->setText(tr("Y: ") + QString::number(center.y()));
@@ -265,10 +279,10 @@ timerMoveRight->stop();
 void MainWindow::on_movedown_pressed()
 {
     timerMoveDown->start(10);
-    rect->getItem()->moveBy(0, 1);
-    rect->getCenterOfMass()->moveBy(0, 1);
+    currentShape->getItem()->moveBy(0, 1);
+    currentShape->getCenterOfMass()->moveBy(0, 1);
 
-    QPointF center = rect->getCenterOfMass()->scenePos();
+    QPointF center = currentShape->getCenterOfMass()->scenePos();
 
     xLabel->setText(tr("X: ") + QString::number(center.x()));
     yLabel->setText(tr("Y: ") + QString::number(center.y()));

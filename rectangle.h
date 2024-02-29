@@ -14,6 +14,8 @@ public:
     QGraphicsEllipseItem* getCenterOfMass() override;
     double getArea() override;
     double getPerimeter() override;
+    void setWidth(int newWidth) { width = newWidth; }
+    void setHeight(int newHeight) { height = newHeight; }
 
 private:
     QGraphicsRectItem *rectangle;
