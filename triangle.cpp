@@ -15,9 +15,10 @@ Triangle::Triangle(int side)
 
     triangle->setPos(-centerX, -centerY);
 
-    centerOfMass = new QGraphicsEllipseItem(0, 0, 10, 10);
-    centerOfMass->setPos(centerX - centerX - 5, centerY - centerY - 5);
+    centerOfMass = new QGraphicsEllipseItem(0, 0, 10, 10, triangle);
+    centerOfMass->setPos(centerX - 5, centerY - 5);
     centerOfMass->setBrush(QBrush(Qt::red));
+    centerOfMass->hide();
 
     triangle->setTransformOriginPoint(centerX, centerY);
 }

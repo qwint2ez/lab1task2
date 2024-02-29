@@ -74,8 +74,8 @@ void MainWindow::on_rectangle_clicked()
 
         QPointF center = rect->getCenterOfMass()->scenePos();
 
-        xLabel->setText(tr("X: ") + QString::number(center.x()));
-        yLabel->setText(tr("Y: ") + QString::number(center.y()));
+        xLabel->setText(tr("X: ") + QString::number(qRound(center.x())));
+        yLabel->setText(tr("Y: ") + QString::number(qRound(center.y())));
     }
 }
 
@@ -118,12 +118,12 @@ void MainWindow::on_calculate_clicked()
     QMessageBox::information(this, tr("Результаты"), message);
 
     QGraphicsEllipseItem *centerOfMass = currentShape->getCenterOfMass();
-    this->scene->addItem(centerOfMass);
+    centerOfMass->show();
 
     QPointF center = currentShape->getCenterOfMass()->scenePos();
 
-    xLabel->setText(tr("X: ") + QString::number(center.x()));
-    yLabel->setText(tr("Y: ") + QString::number(center.y()));
+    xLabel->setText(tr("X: ") + QString::number(qRound(center.x())));
+    yLabel->setText(tr("Y: ") + QString::number(qRound(center.y())));
 }
 
 
@@ -166,12 +166,11 @@ void MainWindow::on_moveCenterButton_clicked()
         QPointF delta = QPointF(newX, newY) - oldCenter;
 
         currentShape->getItem()->moveBy(delta.x(), delta.y());
-        currentShape->getCenterOfMass()->moveBy(delta.x(), delta.y());
 
         QPointF center = currentShape->getCenterOfMass()->scenePos();
 
-        xLabel->setText(tr("X: ") + QString::number(center.x()));
-        yLabel->setText(tr("Y: ") + QString::number(center.y()));
+        xLabel->setText(tr("X: ") + QString::number(qRound(center.x())));
+        yLabel->setText(tr("Y: ") + QString::number(qRound(center.y())));
     }
 }
 
@@ -223,12 +222,11 @@ void MainWindow::on_moveup_pressed()
 {
     timerMoveUp->start(10);
     currentShape->getItem()->moveBy(0, -1);
-    currentShape->getCenterOfMass()->moveBy(0, -1);
 
     QPointF center = currentShape->getCenterOfMass()->scenePos();
 
-    xLabel->setText(tr("X: ") + QString::number(center.x()));
-    yLabel->setText(tr("Y: ") + QString::number(center.y()));
+    xLabel->setText(tr("X: ") + QString::number(qRound(center.x())));
+    yLabel->setText(tr("Y: ") + QString::number(qRound(center.y())));
 }
 
 
@@ -242,12 +240,11 @@ void MainWindow::on_moveleft_pressed()
 {
     timerMoveLeft->start(10);
     currentShape->getItem()->moveBy(-1, 0);
-    currentShape->getCenterOfMass()->moveBy(-1, 0);
 
     QPointF center = currentShape->getCenterOfMass()->scenePos();
 
-    xLabel->setText(tr("X: ") + QString::number(center.x()));
-    yLabel->setText(tr("Y: ") + QString::number(center.y()));
+    xLabel->setText(tr("X: ") + QString::number(qRound(center.x())));
+    yLabel->setText(tr("Y: ") + QString::number(qRound(center.y())));
 }
 
 
@@ -261,12 +258,12 @@ void MainWindow::on_moveright_pressed()
 {
     timerMoveRight->start(10);
     currentShape->getItem()->moveBy(1, 0);
-    currentShape->getCenterOfMass()->moveBy(1, 0);
 
     QPointF center = currentShape->getCenterOfMass()->scenePos();
 
-    xLabel->setText(tr("X: ") + QString::number(center.x()));
-    yLabel->setText(tr("Y: ") + QString::number(center.y()));
+    xLabel->setText(tr("X: ") + QString::number(qRound(center.x())));
+    yLabel->setText(tr("Y: ") + QString::number(qRound(center.y())));
+
 }
 
 
@@ -280,12 +277,12 @@ void MainWindow::on_movedown_pressed()
 {
     timerMoveDown->start(10);
     currentShape->getItem()->moveBy(0, 1);
-    currentShape->getCenterOfMass()->moveBy(0, 1);
 
     QPointF center = currentShape->getCenterOfMass()->scenePos();
 
-    xLabel->setText(tr("X: ") + QString::number(center.x()));
-    yLabel->setText(tr("Y: ") + QString::number(center.y()));
+    xLabel->setText(tr("X: ") + QString::number(qRound(center.x())));
+    yLabel->setText(tr("Y: ") + QString::number(qRound(center.y())));
+
 }
 
 
