@@ -10,15 +10,17 @@ Triangle::Triangle(int side)
     polygon << QPointF(0, 0) << QPointF(side, 0) << QPointF(side / 2, sqrt(3) * side / 2);
     triangle = new QGraphicsPolygonItem(polygon);
 
-    double centerX = polygon.boundingRect().center().x();
-    double centerY = polygon.boundingRect().center().y();
+    double centerX = (polygon[0].x() + polygon[1].x() + polygon[2].x()) / 3;
+    double centerY = (polygon[0].y() + polygon[1].y() + polygon[2].y()) / 3;
 
     triangle->setPos(-centerX, -centerY);
 
     centerOfMass = new QGraphicsEllipseItem(0, 0, 10, 10);
-    centerOfMass->setPos(-5, -5);
+    centerOfMass->setPos(centerX - centerX - 5, centerY - centerY - 5);
     centerOfMass->setBrush(QBrush(Qt::red));
 }
+
+
 
 QGraphicsPolygonItem* Triangle::getItem()
 {

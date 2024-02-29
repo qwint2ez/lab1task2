@@ -71,6 +71,11 @@ void MainWindow::on_rectangle_clicked()
 
         ui->graphicsView->setScene(scene);
         ui->graphicsView->centerOn(rectangle);
+
+        QPointF center = rect->getCenterOfMass()->scenePos();
+
+        xLabel->setText(tr("X: ") + QString::number(center.x()));
+        yLabel->setText(tr("Y: ") + QString::number(center.y()));
     }
 }
 
@@ -94,6 +99,11 @@ void MainWindow::on_triangle_clicked()
 
         ui->graphicsView->setScene(scene);
         ui->graphicsView->centerOn(triangle);
+
+        QPointF center = rect->getCenterOfMass()->scenePos();
+
+        xLabel->setText(tr("X: ") + QString::number(center.x()));
+        yLabel->setText(tr("Y: ") + QString::number(center.y()));
     }
 }
 
