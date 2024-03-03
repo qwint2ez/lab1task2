@@ -13,12 +13,14 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     rectangle.cpp \
+    rhombus.cpp \
     triangle.cpp
 
 HEADERS += \
     circle.h \
     mainwindow.h \
     rectangle.h \
+    rhombus.h \
     shape.h \
     triangle.h
 

@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
     , rect(new Rectangle (0, 0))
     , cir(new Circle(0))
+    , rhom(new Rhombus(0, 0))
 {
     ui->setupUi(this);
     timerClockwise = new QTimer(this);
@@ -48,6 +49,7 @@ MainWindow::~MainWindow()
     delete rect;
     delete tri;
     delete cir;
+    delete rhom;
     delete ui;
 }
 
@@ -108,6 +110,35 @@ void MainWindow::on_triangle_clicked()
 
     }
 }
+
+void MainWindow::on_rhombus_clicked()
+{
+    bool ok;
+    int diagonal1 = QInputDialog::getInt(this, tr("Введите первую диагональ"),
+                                         tr("Диагональ 1:"), 100, 0, 1000, 1, &ok);
+    int diagonal2 = QInputDialog::getInt(this, tr("Введите вторую диагональ"),
+                                         tr("Диагональ 2:"), 100, 0, 1000, 1, &ok);
+
+    if (ok) {
+        Rhombus* rhom = new Rhombus(diagonal1, diagonal2);
+        currentShape = rhom;
+
+        QGraphicsScene* scene = new QGraphicsScene(this);
+
+        QGraphicsPolygonItem* rhombus = rhom->getItem();
+
+        rhombus->setTransformOriginPoint(rhombus->boundingRect().center());
+
+        scene->addItem(rhombus);
+
+        ui->graphicsView->setScene(scene);
+        ui->graphicsView->centerOn(rhombus);
+
+        xLabel->setText(tr("x: -5 "));
+        yLabel->setText(tr("y: -5 "));
+    }
+}
+
 
 
 void MainWindow::on_circle_clicked()
@@ -220,6 +251,10 @@ void MainWindow::on_scaleUpButton_pressed()
     } else if (Circle* cir = dynamic_cast<Circle*>(currentShape)) {
         diameter = diameter * 1.01;
         cir->setDiameter(diameter);
+    } else if (Rhombus* rhom = dynamic_cast<Rhombus*>(currentShape)) {
+        int diagonal1 = rhom->getDiagonal1() * 1.01;
+        int diagonal2 = rhom->getDiagonal2() * 1.01;
+        rhom->setDiagonals(diagonal1, diagonal2);
     }
 }
 
@@ -244,8 +279,13 @@ void MainWindow::on_scaleDownButton_pressed()
     } else if (Circle* cir = dynamic_cast<Circle*>(currentShape)) {
         diameter = diameter / 1.01;
         cir->setDiameter(diameter);
+    } else if (Rhombus* rhom = dynamic_cast<Rhombus*>(currentShape)) {
+        int diagonal1 = rhom->getDiagonal1() / 1.01;
+        int diagonal2 = rhom->getDiagonal2() / 1.01;
+        rhom->setDiagonals(diagonal1, diagonal2);
     }
 }
+
 
 void MainWindow::on_scaleDownButton_released()
 {
@@ -326,8 +366,4 @@ void MainWindow::on_movedown_released()
 {
 timerMoveDown->stop();
 }
-
-
-
-
 
