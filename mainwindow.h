@@ -9,6 +9,7 @@
 #include "triangle.h"
 #include "circle.h"
 #include "rhombus.h"
+#include "square.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -72,12 +73,15 @@ private slots:
 
     void on_rhombus_clicked();
 
+    void on_square_clicked();
+
 private:
     Ui::MainWindow *ui;
     Shape *currentShape;
     double width;
     double height;
     double side;
+    double sideSquare;
     double diameter;
     double diagonal1;
     double diagonal2;
@@ -85,6 +89,7 @@ private:
     Triangle* tri;
     Circle* cir;
     Rhombus* rhom;
+    Square* square;
     QGraphicsScene *scene;
     QTimer *timerClockwise;
     QTimer *timerCounterClockwise;
@@ -97,4 +102,5 @@ private:
     QLabel* xLabel;
     QLabel* yLabel;
 };
+
 #endif // MAINWINDOW_H

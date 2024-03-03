@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     , rect(new Rectangle (0, 0))
     , cir(new Circle(0))
     , rhom(new Rhombus(0, 0))
+    , square(new Square (0))
 {
     ui->setupUi(this);
     timerClockwise = new QTimer(this);
@@ -50,6 +51,7 @@ MainWindow::~MainWindow()
     delete tri;
     delete cir;
     delete rhom;
+    delete square;
     delete ui;
 }
 
@@ -167,6 +169,37 @@ void MainWindow::on_circle_clicked()
     }
 }
 
+void MainWindow::on_square_clicked()
+{
+    bool ok;
+    sideSquare = QInputDialog::getInt(this, tr("Введите сторону"),
+                                      tr("Сторона:"), 100, 0, 1000, 1, &ok);
+
+    if (ok) {
+        delete square; // удалите старый объект Square
+        square = new Square(sideSquare);
+        currentShape = square;
+
+        scene = new QGraphicsScene(this);
+
+        QGraphicsRectItem *squareItem = square->getItem();
+
+        squareItem->setTransformOriginPoint(squareItem->boundingRect().center());
+
+        scene->addItem(squareItem);
+
+        ui->graphicsView->setScene(scene);
+        ui->graphicsView->centerOn(squareItem);
+
+        QPointF center = square->getCenterOfMass()->scenePos();
+
+        xLabel->setText(tr("x: ") + QString::number(qRound(center.x())));
+        yLabel->setText(tr("y: ") + QString::number(qRound(center.y())));
+
+        scene->update();
+    }
+}
+
 
 
 
@@ -256,6 +289,10 @@ void MainWindow::on_scaleUpButton_pressed()
         int diagonal2 = rhom->getDiagonal2() * 1.01;
         rhom->setDiagonals(diagonal1, diagonal2);
     }
+    else if (Square* square = dynamic_cast<Square*>(currentShape)) {
+        sideSquare = sideSquare * 1.01;
+        square->setSideSquare(sideSquare);
+    }
 }
 
 void MainWindow::on_scaleUpButton_released()
@@ -283,6 +320,10 @@ void MainWindow::on_scaleDownButton_pressed()
         int diagonal1 = rhom->getDiagonal1() / 1.01;
         int diagonal2 = rhom->getDiagonal2() / 1.01;
         rhom->setDiagonals(diagonal1, diagonal2);
+    }
+    else if (Square* square = dynamic_cast<Square*>(currentShape)) {
+        sideSquare = sideSquare / 1.01;
+        square->setSideSquare(sideSquare);
     }
 }
 
@@ -366,4 +407,7 @@ void MainWindow::on_movedown_released()
 {
 timerMoveDown->stop();
 }
+
+
+
 
