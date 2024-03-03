@@ -52,8 +52,3 @@ void Hexagon::moveCenterOfMass(double dx, double dy)
     centerOfMass->moveBy(dx, dy);
 }
 
-void Hexagon::scale(double factor)
-{
-    hexagon->setScale(hexagon->scale() * factor);
-    centerOfMass->setScale(centerOfMass->scale() * factor);
-}

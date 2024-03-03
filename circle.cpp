@@ -46,8 +46,3 @@ void Circle::moveCenterOfMass(double dx, double dy)
     centerOfMass->moveBy(dx, dy);
 }
 
-void Circle::scale(double factor)
-{
-    circle->setScale(circle->scale() * factor);
-    centerOfMass->setScale(centerOfMass->scale() * factor);
-}

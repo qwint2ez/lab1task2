@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>600</height>
+    <height>623</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -31,17 +31,17 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>60</y>
+      <y>80</y>
       <width>561</width>
-      <height>471</height>
+      <height>461</height>
      </rect>
     </property>
    </widget>
    <widget class="QPushButton" name="calculate">
     <property name="geometry">
      <rect>
-      <x>600</x>
-      <y>60</y>
+      <x>580</x>
+      <y>80</y>
       <width>171</width>
       <height>21</height>
      </rect>
@@ -53,8 +53,8 @@
    <widget class="QPushButton" name="turnclockwise">
     <property name="geometry">
      <rect>
-      <x>600</x>
-      <y>90</y>
+      <x>580</x>
+      <y>110</y>
       <width>171</width>
       <height>21</height>
      </rect>
@@ -66,8 +66,8 @@
    <widget class="QPushButton" name="turncounterclockwise">
     <property name="geometry">
      <rect>
-      <x>600</x>
-      <y>120</y>
+      <x>580</x>
+      <y>140</y>
       <width>171</width>
       <height>21</height>
      </rect>
@@ -79,10 +79,10 @@
    <widget class="QPushButton" name="moveCenterButton">
     <property name="geometry">
      <rect>
-      <x>600</x>
-      <y>150</y>
+      <x>580</x>
+      <y>170</y>
       <width>171</width>
-      <height>25</height>
+      <height>21</height>
      </rect>
     </property>
     <property name="text">
@@ -92,10 +92,10 @@
    <widget class="QPushButton" name="scaleUpButton">
     <property name="geometry">
      <rect>
-      <x>600</x>
-      <y>180</y>
+      <x>580</x>
+      <y>200</y>
       <width>171</width>
-      <height>25</height>
+      <height>21</height>
      </rect>
     </property>
     <property name="text">
@@ -105,10 +105,10 @@
    <widget class="QPushButton" name="scaleDownButton">
     <property name="geometry">
      <rect>
-      <x>600</x>
-      <y>210</y>
+      <x>580</x>
+      <y>230</y>
       <width>171</width>
-      <height>25</height>
+      <height>21</height>
      </rect>
     </property>
     <property name="text">
@@ -119,7 +119,7 @@
     <property name="geometry">
      <rect>
       <x>610</x>
-      <y>300</y>
+      <y>310</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -131,7 +131,7 @@
    <widget class="QPushButton" name="movedown">
     <property name="geometry">
      <rect>
-      <x>660</x>
+      <x>650</x>
       <y>350</y>
       <width>41</width>
       <height>41</height>
@@ -144,8 +144,8 @@
    <widget class="QPushButton" name="moveright">
     <property name="geometry">
      <rect>
-      <x>710</x>
-      <y>300</y>
+      <x>690</x>
+      <y>310</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -157,8 +157,8 @@
    <widget class="QPushButton" name="moveup">
     <property name="geometry">
      <rect>
-      <x>660</x>
-      <y>250</y>
+      <x>650</x>
+      <y>270</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -171,7 +171,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>530</y>
+      <y>550</y>
       <width>67</width>
       <height>17</height>
      </rect>
@@ -184,7 +184,7 @@
     <property name="geometry">
      <rect>
       <x>90</x>
-      <y>530</y>
+      <y>550</y>
       <width>67</width>
       <height>17</height>
      </rect>
@@ -248,14 +248,66 @@
    <widget class="QPushButton" name="hexagon">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>10</y>
+      <x>10</x>
+      <y>40</y>
       <width>89</width>
       <height>25</height>
      </rect>
     </property>
     <property name="text">
      <string>hexagon</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="fivestar">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>40</y>
+      <width>89</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>5-star</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="sixstar">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>40</y>
+      <width>89</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>6-star</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="eightstar">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>40</y>
+      <width>89</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>8-star</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_4">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>40</y>
+      <width>89</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>???</string>
     </property>
    </widget>
   </widget>

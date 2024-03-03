@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     , rhom(new Rhombus(0, 0))
     , square(new Square (0))
     , hex(new Hexagon (0))
+    , fstar(new FiveStar (0))
 {
     ui->setupUi(this);
     timerClockwise = new QTimer(this);
@@ -54,6 +55,7 @@ MainWindow::~MainWindow()
     delete rhom;
     delete square;
     delete hex;
+    delete fstar;
     delete ui;
 }
 
@@ -228,6 +230,31 @@ void MainWindow::on_hexagon_clicked()
     }
 }
 
+void MainWindow::on_fivestar_clicked()
+{
+    bool ok;
+    int radius = QInputDialog::getInt(this, tr("Введите радиус"),
+                                      tr("Радиус:"), 100, 0, 1000, 1, &ok);
+
+    if (ok) {
+        FiveStar *fstar = new FiveStar(radius);
+        currentShape = fstar;
+
+        scene = new QGraphicsScene(this);
+
+        QGraphicsPolygonItem *fivestar = fstar->getItem();
+
+        fivestar->setTransformOriginPoint(fivestar->boundingRect().center());
+
+        scene->addItem(fivestar);
+
+        ui->graphicsView->setScene(scene);
+        ui->graphicsView->centerOn(fivestar);
+
+        xLabel->setText(tr("X: -5 "));
+        yLabel->setText(tr("Y: -5 "));
+    }
+}
 
 
 
@@ -301,6 +328,7 @@ void MainWindow::on_scaleUpButton_pressed()
     timerScaleUp->start(10);
     qreal currentScale = this->currentShape->getItem()->scale();
     this->currentShape->getItem()->setScale(currentScale * 1.01);
+
     if (Rectangle* rect = dynamic_cast<Rectangle*>(currentShape)) {
         width = width * 1.01;
         height = height * 1.01;
@@ -324,6 +352,10 @@ void MainWindow::on_scaleUpButton_pressed()
     else if (Hexagon* hex = dynamic_cast<Hexagon*>(currentShape)) {
         sideHexagon = sideHexagon * 1.01;
         hex->setSideHexagon(sideHexagon);
+    }
+    else if (FiveStar* fstar = dynamic_cast<FiveStar*>(currentShape)) {
+        radius = radius * 1.01;
+        fstar->setRadius(radius);
     }
 }
 
@@ -360,6 +392,10 @@ void MainWindow::on_scaleDownButton_pressed()
     else if (Hexagon* hex = dynamic_cast<Hexagon*>(currentShape)) {
         sideHexagon = sideHexagon / 1.01;
         hex->setSideHexagon(sideHexagon);
+    }
+    else if (FiveStar* fstar = dynamic_cast<FiveStar*>(currentShape)) {
+        radius = radius / 1.01;
+        fstar->setRadius(radius);
     }
 }
 

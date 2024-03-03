@@ -49,10 +49,4 @@ void Rhombus::moveCenterOfMass(double dx, double dy)
     centerOfMass->moveBy(dx, dy);
 }
 
-void Rhombus::scale(double factor)
-{
-    rhombus->setScale(rhombus->scale() * factor);
-    centerOfMass->setScale(centerOfMass->scale() * factor);
-}
-
 

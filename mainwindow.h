@@ -11,6 +11,7 @@
 #include "rhombus.h"
 #include "square.h"
 #include "hexagon.h"
+#include "fivestar.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -78,6 +79,8 @@ private slots:
 
     void on_hexagon_clicked();
 
+    void on_fivestar_clicked();
+
 private:
     Ui::MainWindow *ui;
     Shape *currentShape;
@@ -89,12 +92,14 @@ private:
     double diagonal1;
     double diagonal2;
     double sideHexagon;
+    double radius;
     Rectangle* rect;
     Triangle* tri;
     Circle* cir;
     Rhombus* rhom;
     Square* square;
     Hexagon* hex;
+    FiveStar* fstar;
     QGraphicsScene *scene;
     QTimer *timerClockwise;
     QTimer *timerCounterClockwise;

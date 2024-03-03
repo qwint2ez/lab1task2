@@ -49,9 +49,3 @@ void Triangle::moveCenterOfMass(double dx, double dy)
     triangle->moveBy(dx, dy);
     centerOfMass->moveBy(dx, dy);
 }
-
-void Triangle::scale(double factor)
-{
-    triangle->setScale(triangle->scale() * factor);
-    centerOfMass->setScale(centerOfMass->scale() * factor);
-}
