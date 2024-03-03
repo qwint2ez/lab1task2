@@ -12,6 +12,8 @@ MainWindow::MainWindow(QWidget *parent)
     , square(new Square (0))
     , hex(new Hexagon (0))
     , fstar(new FiveStar (0))
+    , sstar(new SixStar (0))
+    , estar(new EightStar (0))
 {
     ui->setupUi(this);
     timerClockwise = new QTimer(this);
@@ -56,6 +58,8 @@ MainWindow::~MainWindow()
     delete square;
     delete hex;
     delete fstar;
+    delete sstar;
+    delete estar;
     delete ui;
 }
 
@@ -253,6 +257,58 @@ void MainWindow::on_fivestar_clicked()
 
         xLabel->setText(tr("X: -5 "));
         yLabel->setText(tr("Y: -5 "));
+    }
+}
+
+void MainWindow::on_sixstar_clicked()
+{
+    bool ok;
+    int radius = QInputDialog::getInt(this, tr("Введите радиус"),
+                                      tr("Радиус:"), 100, 0, 1000, 1, &ok);
+
+    if (ok) {
+        SixStar *sstar = new SixStar(radius);
+        currentShape = sstar;
+
+        scene = new QGraphicsScene(this);
+
+        QGraphicsPolygonItem *sixstar = sstar->getItem();
+
+        sixstar->setTransformOriginPoint(sixstar->boundingRect().center());
+
+        scene->addItem(sixstar);
+
+        ui->graphicsView->setScene(scene);
+        ui->graphicsView->centerOn(sixstar);
+
+        xLabel->setText(tr("X: -6 "));
+        yLabel->setText(tr("Y: -6 "));
+    }
+}
+
+void MainWindow::on_eightstar_clicked()
+{
+    bool ok;
+    int radius = QInputDialog::getInt(this, tr("Введите радиус"),
+                                      tr("Радиус:"), 100, 0, 1000, 1, &ok);
+
+    if (ok) {
+        EightStar *estar = new EightStar(radius);
+        currentShape = estar;
+
+        scene = new QGraphicsScene(this);
+
+        QGraphicsPolygonItem *eightstar = estar->getItem();
+
+        eightstar->setTransformOriginPoint(eightstar->boundingRect().center());
+
+        scene->addItem(eightstar);
+
+        ui->graphicsView->setScene(scene);
+        ui->graphicsView->centerOn(eightstar);
+
+        xLabel->setText(tr("X: -8 "));
+        yLabel->setText(tr("Y: -8 "));
     }
 }
 
@@ -479,5 +535,8 @@ void MainWindow::on_movedown_released()
 {
 timerMoveDown->stop();
 }
+
+
+
 
 

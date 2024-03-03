@@ -12,6 +12,8 @@
 #include "square.h"
 #include "hexagon.h"
 #include "fivestar.h"
+#include "sixstar.h"
+#include "eightstar.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -81,6 +83,10 @@ private slots:
 
     void on_fivestar_clicked();
 
+    void on_sixstar_clicked();
+
+    void on_eightstar_clicked();
+
 private:
     Ui::MainWindow *ui;
     Shape *currentShape;
@@ -100,6 +106,8 @@ private:
     Square* square;
     Hexagon* hex;
     FiveStar* fstar;
+    SixStar* sstar;
+    EightStar* estar;
     QGraphicsScene *scene;
     QTimer *timerClockwise;
     QTimer *timerCounterClockwise;
