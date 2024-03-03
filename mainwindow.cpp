@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
     , rect(new Rectangle (0, 0))
+    , cir(new Circle(0))
 {
     ui->setupUi(this);
     timerClockwise = new QTimer(this);
@@ -46,6 +47,7 @@ MainWindow::~MainWindow()
 {
     delete rect;
     delete tri;
+    delete cir;
     delete ui;
 }
 
@@ -106,6 +108,34 @@ void MainWindow::on_triangle_clicked()
 
     }
 }
+
+
+void MainWindow::on_circle_clicked()
+{
+    bool ok;
+    diameter = QInputDialog::getInt(this, tr("Введите диаметр"),
+                                    tr("Диаметр:"), 100, 0, 1000, 1, &ok);
+
+    if (ok) {
+        Circle* cir = new Circle(diameter);
+        currentShape = cir;
+
+        QGraphicsScene* scene = new QGraphicsScene(this);
+
+        QGraphicsEllipseItem* circle = cir->getItem();
+
+        circle->setTransformOriginPoint(circle->boundingRect().center());
+
+        scene->addItem(circle);
+
+        ui->graphicsView->setScene(scene);
+        ui->graphicsView->centerOn(circle);
+
+        xLabel->setText(tr("X: -5 "));
+        yLabel->setText(tr("Y: -5 "));
+    }
+}
+
 
 
 
@@ -187,6 +217,9 @@ void MainWindow::on_scaleUpButton_pressed()
     } else if (Triangle* tri = dynamic_cast<Triangle*>(currentShape)) {
         side = side * 1.01;
         tri->setSide(side);
+    } else if (Circle* cir = dynamic_cast<Circle*>(currentShape)) {
+        diameter = diameter * 1.01;
+        cir->setDiameter(diameter);
     }
 }
 
@@ -208,6 +241,9 @@ void MainWindow::on_scaleDownButton_pressed()
     } else if (Triangle* tri = dynamic_cast<Triangle*>(currentShape)) {
         side = side / 1.01;
         tri->setSide(side);
+    } else if (Circle* cir = dynamic_cast<Circle*>(currentShape)) {
+        diameter = diameter / 1.01;
+        cir->setDiameter(diameter);
     }
 }
 
@@ -290,6 +326,8 @@ void MainWindow::on_movedown_released()
 {
 timerMoveDown->stop();
 }
+
+
 
 
 

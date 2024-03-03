@@ -7,6 +7,7 @@
 #include <QMessageBox>
 #include "rectangle.h"
 #include "triangle.h"
+#include "circle.h" // Не забудьте добавить эту строку
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -66,14 +67,18 @@ private slots:
 
     void on_triangle_clicked();
 
+    void on_circle_clicked();
+
 private:
     Ui::MainWindow *ui;
     Shape *currentShape;
     double width;
     double height;
     double side;
+    double diameter;
     Rectangle* rect;
     Triangle* tri;
+    Circle* cir; // Добавьте эту строку
     QGraphicsScene *scene;
     QTimer *timerClockwise;
     QTimer *timerCounterClockwise;
