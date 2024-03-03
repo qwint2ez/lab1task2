@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     circle.cpp \
+    hexagon.cpp \
     main.cpp \
     mainwindow.cpp \
     rectangle.cpp \
@@ -19,6 +20,7 @@ SOURCES += \
 
 HEADERS += \
     circle.h \
+    hexagon.h \
     mainwindow.h \
     rectangle.h \
     rhombus.h \

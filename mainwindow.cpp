@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
     , cir(new Circle(0))
     , rhom(new Rhombus(0, 0))
     , square(new Square (0))
+    , hex(new Hexagon (0))
 {
     ui->setupUi(this);
     timerClockwise = new QTimer(this);
@@ -52,6 +53,7 @@ MainWindow::~MainWindow()
     delete cir;
     delete rhom;
     delete square;
+    delete hex;
     delete ui;
 }
 
@@ -200,6 +202,32 @@ void MainWindow::on_square_clicked()
     }
 }
 
+void MainWindow::on_hexagon_clicked()
+{
+    bool ok;
+    sideHexagon = QInputDialog::getInt(this, tr("Введите сторону"),
+                                tr("Сторона:"), 100, 0, 1000, 1, &ok);
+
+    if (ok) {
+        Hexagon *hex = new Hexagon(sideHexagon);
+        currentShape = hex;
+
+        scene = new QGraphicsScene(this);
+
+        QGraphicsPolygonItem *hexagon = hex->getItem();
+
+        hexagon->setTransformOriginPoint(hexagon->boundingRect().center());
+
+        scene->addItem(hexagon);
+
+        ui->graphicsView->setScene(scene);
+        ui->graphicsView->centerOn(hexagon);
+
+        xLabel->setText(tr("X: -5 "));
+        yLabel->setText(tr("Y: -5 "));
+    }
+}
+
 
 
 
@@ -293,6 +321,10 @@ void MainWindow::on_scaleUpButton_pressed()
         sideSquare = sideSquare * 1.01;
         square->setSideSquare(sideSquare);
     }
+    else if (Hexagon* hex = dynamic_cast<Hexagon*>(currentShape)) {
+        sideHexagon = sideHexagon * 1.01;
+        hex->setSideHexagon(sideHexagon);
+    }
 }
 
 void MainWindow::on_scaleUpButton_released()
@@ -324,6 +356,10 @@ void MainWindow::on_scaleDownButton_pressed()
     else if (Square* square = dynamic_cast<Square*>(currentShape)) {
         sideSquare = sideSquare / 1.01;
         square->setSideSquare(sideSquare);
+    }
+    else if (Hexagon* hex = dynamic_cast<Hexagon*>(currentShape)) {
+        sideHexagon = sideHexagon / 1.01;
+        hex->setSideHexagon(sideHexagon);
     }
 }
 
@@ -407,7 +443,5 @@ void MainWindow::on_movedown_released()
 {
 timerMoveDown->stop();
 }
-
-
 
 
