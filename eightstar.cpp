@@ -3,12 +3,12 @@
 #include <QPolygonF>
 #include <cmath>
 
-EightStar::EightStar(int radius)
-    : radius(radius)
+EightStar::EightStar(int eradius)
+    : eradius(eradius)
 {
     QPolygonF polygon;
     for (int i = 0; i < 16; ++i) {
-        double r = (i % 2 == 0) ? radius : radius / 2.0;
+        double r = (i % 2 == 0) ? eradius : eradius / 2.0;
         polygon << QPointF(r * cos(i * M_PI / 8), r * sin(i * M_PI / 8));
     }
     estar = new QGraphicsPolygonItem(polygon);
@@ -38,12 +38,12 @@ QGraphicsEllipseItem* EightStar::getCenterOfMass()
 
 double EightStar::getArea()
 {
-    return 2 * sqrt(2) * (radius) * (radius);
+    return 2 * sqrt(2) * (eradius) * (eradius);
 }
 
 double EightStar::getPerimeter()
 {
-    return 16 * (radius) * sin(M_PI / 8);
+    return 16 * (eradius) * sin(M_PI / 8);
 }
 
 void EightStar::moveCenterOfMass(double dx, double dy)

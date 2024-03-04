@@ -3,12 +3,12 @@
 #include <QPolygonF>
 #include <cmath>
 
-FiveStar::FiveStar(int radius)
-    : radius(radius)
+FiveStar::FiveStar(int fradius)
+    : fradius(fradius)
 {
     QPolygonF polygon;
     for (int i = 0; i < 10; ++i) {
-        double r = (i % 2 == 0) ? radius : radius / 2.0;
+        double r = (i % 2 == 0) ? fradius : fradius / 2.0;
         polygon << QPointF(r * cos(i * M_PI / 5), r * sin(i * M_PI / 5));
     }
     fstar = new QGraphicsPolygonItem(polygon);
@@ -39,12 +39,12 @@ QGraphicsEllipseItem* FiveStar::getCenterOfMass()
 
 double FiveStar::getArea()
 {
-    return 5.0 / 4.0 * (radius) * (radius) * tan(M_PI / 5);
+    return 5.0 / 4.0 * (fradius) * (fradius) * tan(M_PI / 5);
 }
 
 double FiveStar::getPerimeter()
 {
-    return 10 * (radius) * sin(M_PI / 5);
+    return 10 * (fradius) * sin(M_PI / 5);
 }
 
 void FiveStar::moveCenterOfMass(double dx, double dy)
@@ -52,5 +52,4 @@ void FiveStar::moveCenterOfMass(double dx, double dy)
     fstar->moveBy(dx, dy);
     centerOfMass->moveBy(dx, dy);
 }
-
 

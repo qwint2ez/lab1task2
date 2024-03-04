@@ -10,6 +10,8 @@ public:
 
     virtual QGraphicsItem* getItem() = 0;
     virtual QGraphicsEllipseItem* getCenterOfMass() = 0;
+    virtual QGraphicsLineItem* getLine1() = 0;
+    virtual QGraphicsLineItem* getLine2() = 0;
     virtual double getArea() = 0;
     virtual double getPerimeter() = 0;
 };

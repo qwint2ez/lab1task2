@@ -325,11 +325,22 @@ void MainWindow::on_calculate_clicked()
     QGraphicsEllipseItem *centerOfMass = currentShape->getCenterOfMass();
     centerOfMass->show();
 
+    QGraphicsLineItem *line1 = currentShape->getLine1();
+    if (line1 != nullptr) {
+        line1->show();
+    }
+
+    QGraphicsLineItem *line2 = currentShape->getLine2();
+    if (line2 != nullptr) {
+        line2->show();
+    }
+
     QPointF center = currentShape->getCenterOfMass()->scenePos();
 
     xLabel->setText(tr("X: ") + QString::number(qRound(center.x())));
     yLabel->setText(tr("Y: ") + QString::number(qRound(center.y())));
 }
+
 
 
 
@@ -410,8 +421,16 @@ void MainWindow::on_scaleUpButton_pressed()
         hex->setSideHexagon(sideHexagon);
     }
     else if (FiveStar* fstar = dynamic_cast<FiveStar*>(currentShape)) {
-        radius = radius * 1.01;
-        fstar->setRadius(radius);
+        fradius = fradius * 1.01;
+        fstar->setRadius(fradius);
+    }
+    else if (SixStar* sstar = dynamic_cast<SixStar*>(currentShape)) {
+        sradius = sradius * 1.01;
+        sstar->setRadius(sradius);
+    }
+    else if (EightStar* estar = dynamic_cast<EightStar*>(currentShape)) {
+        eradius = eradius * 1.01;
+        estar->setRadius(eradius);
     }
 }
 
@@ -450,8 +469,16 @@ void MainWindow::on_scaleDownButton_pressed()
         hex->setSideHexagon(sideHexagon);
     }
     else if (FiveStar* fstar = dynamic_cast<FiveStar*>(currentShape)) {
-        radius = radius / 1.01;
-        fstar->setRadius(radius);
+        fradius = fradius / 1.01;
+        fstar->setRadius(fradius);
+    }
+    else if (SixStar* sstar = dynamic_cast<SixStar*>(currentShape)) {
+        sradius = sradius / 1.01;
+        sstar->setRadius(sradius);
+    }
+    else if (EightStar* estar = dynamic_cast<EightStar*>(currentShape)) {
+        eradius = eradius / 1.01;
+        estar->setRadius(eradius);
     }
 }
 

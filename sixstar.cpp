@@ -3,12 +3,12 @@
 #include <QPolygonF>
 #include <cmath>
 
-SixStar::SixStar(int radius)
-    : radius(radius)
+SixStar::SixStar(int sradius)
+    : sradius(sradius)
 {
     QPolygonF polygon;
     for (int i = 0; i < 12; ++i) {
-        double r = (i % 2 == 0) ? radius : radius / 2.0;
+        double r = (i % 2 == 0) ? sradius : sradius / 2.0;
         polygon << QPointF(r * cos(i * M_PI / 6), r * sin(i * M_PI / 6));
     }
     sstar = new QGraphicsPolygonItem(polygon);
@@ -38,12 +38,12 @@ QGraphicsEllipseItem* SixStar::getCenterOfMass()
 
 double SixStar::getArea()
 {
-    return 3 * sqrt(3) / 2 * (radius) * (radius);
+    return 3 * sqrt(3) / 2 * (sradius) * (sradius);
 }
 
 double SixStar::getPerimeter()
 {
-    return 12 * (radius) * sin(M_PI / 6);
+    return 12 * (sradius) * sin(M_PI / 6);
 }
 
 void SixStar::moveCenterOfMass(double dx, double dy)

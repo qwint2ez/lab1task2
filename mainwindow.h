@@ -98,7 +98,9 @@ private:
     double diagonal1;
     double diagonal2;
     double sideHexagon;
-    double radius;
+    double fradius;
+    double sradius;
+    double eradius;
     Rectangle* rect;
     Triangle* tri;
     Circle* cir;
