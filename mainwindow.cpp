@@ -114,12 +114,13 @@ void MainWindow::on_triangle_clicked()
         ui->graphicsView->setScene(scene);
         ui->graphicsView->centerOn(triangle);
 
-        xLabel->setText(tr("X: -5 "));
-        yLabel->setText(tr("Y: -5 "));
+        QPointF center = tri->getCenterOfMass()->scenePos();
 
-
+        xLabel->setText(tr("X: ") + QString::number(qRound(center.x())));
+        yLabel->setText(tr("Y: ") + QString::number(qRound(center.y())));
     }
 }
+
 
 void MainWindow::on_rhombus_clicked()
 {
@@ -144,8 +145,10 @@ void MainWindow::on_rhombus_clicked()
         ui->graphicsView->setScene(scene);
         ui->graphicsView->centerOn(rhombus);
 
-        xLabel->setText(tr("x: -5 "));
-        yLabel->setText(tr("y: -5 "));
+        QPointF center = rhom->getCenterOfMass()->scenePos();
+
+        xLabel->setText(tr("X: ") + QString::number(qRound(center.x())));
+        yLabel->setText(tr("Y: ") + QString::number(qRound(center.y())));
     }
 }
 
@@ -172,8 +175,10 @@ void MainWindow::on_circle_clicked()
         ui->graphicsView->setScene(scene);
         ui->graphicsView->centerOn(circle);
 
-        xLabel->setText(tr("X: -5 "));
-        yLabel->setText(tr("Y: -5 "));
+        QPointF center = cir->getCenterOfMass()->scenePos();
+
+        xLabel->setText(tr("X: ") + QString::number(qRound(center.x())));
+        yLabel->setText(tr("Y: ") + QString::number(qRound(center.y())));
     }
 }
 
@@ -201,8 +206,8 @@ void MainWindow::on_square_clicked()
 
         QPointF center = square->getCenterOfMass()->scenePos();
 
-        xLabel->setText(tr("x: ") + QString::number(qRound(center.x())));
-        yLabel->setText(tr("y: ") + QString::number(qRound(center.y())));
+        xLabel->setText(tr("X: ") + QString::number(qRound(center.x())));
+        yLabel->setText(tr("Y: ") + QString::number(qRound(center.y())));
 
         scene->update();
     }
@@ -229,8 +234,10 @@ void MainWindow::on_hexagon_clicked()
         ui->graphicsView->setScene(scene);
         ui->graphicsView->centerOn(hexagon);
 
-        xLabel->setText(tr("X: -5 "));
-        yLabel->setText(tr("Y: -5 "));
+        QPointF center = hex->getCenterOfMass()->scenePos();
+
+        xLabel->setText(tr("X: ") + QString::number(qRound(center.x())));
+        yLabel->setText(tr("Y: ") + QString::number(qRound(center.y())));
     }
 }
 
@@ -255,8 +262,10 @@ void MainWindow::on_fivestar_clicked()
         ui->graphicsView->setScene(scene);
         ui->graphicsView->centerOn(fivestar);
 
-        xLabel->setText(tr("X: -5 "));
-        yLabel->setText(tr("Y: -5 "));
+        QPointF center = fstar->getCenterOfMass()->scenePos();
+
+        xLabel->setText(tr("X: ") + QString::number(qRound(center.x())));
+        yLabel->setText(tr("Y: ") + QString::number(qRound(center.y())));
     }
 }
 
@@ -281,8 +290,10 @@ void MainWindow::on_sixstar_clicked()
         ui->graphicsView->setScene(scene);
         ui->graphicsView->centerOn(sixstar);
 
-        xLabel->setText(tr("X: -6 "));
-        yLabel->setText(tr("Y: -6 "));
+        QPointF center = sstar->getCenterOfMass()->scenePos();
+
+        xLabel->setText(tr("X: ") + QString::number(qRound(center.x())));
+        yLabel->setText(tr("Y: ") + QString::number(qRound(center.y())));
     }
 }
 
@@ -307,12 +318,17 @@ void MainWindow::on_eightstar_clicked()
         ui->graphicsView->setScene(scene);
         ui->graphicsView->centerOn(eightstar);
 
-        xLabel->setText(tr("X: -8 "));
-        yLabel->setText(tr("Y: -8 "));
+        QPointF center = estar->getCenterOfMass()->scenePos();
+
+        xLabel->setText(tr("X: ") + QString::number(qRound(center.x())));
+        yLabel->setText(tr("Y: ") + QString::number(qRound(center.y())));
     }
 }
 
+void MainWindow::on_secretfigure_clicked()
+{
 
+}
 
 void MainWindow::on_calculate_clicked()
 {
@@ -349,6 +365,7 @@ void MainWindow::on_turnclockwise_pressed()
     timerClockwise->start(10);
     qreal currentRotation = this->currentShape->getItem()->rotation();
     this->currentShape->getItem()->setRotation(currentRotation - 1);
+    this->currentShape->getCenterOfMass()->setPos(this->currentShape->getItem()->boundingRect().center());
 }
 
 void MainWindow::on_turnclockwise_released()
@@ -361,6 +378,7 @@ void MainWindow::on_turncounterclockwise_pressed()
     timerCounterClockwise->start(10);
     qreal currentRotation = this->currentShape->getItem()->rotation();
     this->currentShape->getItem()->setRotation(currentRotation + 1);
+    this->currentShape->getCenterOfMass()->setPos(this->currentShape->getItem()->boundingRect().center());
 }
 
 void MainWindow::on_turncounterclockwise_released()
@@ -562,8 +580,6 @@ void MainWindow::on_movedown_released()
 {
 timerMoveDown->stop();
 }
-
-
 
 
 

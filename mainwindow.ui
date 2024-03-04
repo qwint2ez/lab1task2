@@ -297,7 +297,7 @@
      <string>8-star</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="secretfigure">
     <property name="geometry">
      <rect>
       <x>370</x>

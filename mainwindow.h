@@ -87,6 +87,8 @@ private slots:
 
     void on_eightstar_clicked();
 
+    void on_secretfigure_clicked();
+
 private:
     Ui::MainWindow *ui;
     Shape *currentShape;

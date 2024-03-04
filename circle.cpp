@@ -13,8 +13,8 @@ Circle::Circle(int diameter)
 
     circle->setPos(-centerX, -centerY);
 
-    centerOfMass = new QGraphicsEllipseItem(0, 0, 10, 10, circle);
-    centerOfMass->setPos(centerX - 5, centerY - 5);
+    centerOfMass = new QGraphicsEllipseItem(0, 0, 0, 0, circle);
+    centerOfMass->setPos(centerX, centerY);
     centerOfMass->setBrush(QBrush(Qt::red));
     centerOfMass->hide();
 
@@ -41,6 +41,7 @@ Circle::Circle(int diameter)
     line2->hide();
 }
 
+
 QGraphicsEllipseItem* Circle::getItem()
 {
     return circle;
@@ -66,4 +67,3 @@ void Circle::moveCenterOfMass(double dx, double dy)
     circle->moveBy(dx, dy);
     centerOfMass->moveBy(dx, dy);
 }
-

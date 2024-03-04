@@ -12,8 +12,8 @@ public:
 
     QGraphicsRectItem* getItem() override;
     QGraphicsEllipseItem* getCenterOfMass() override;
-    QGraphicsLineItem* getLine1() override { return nullptr; }
-    QGraphicsLineItem* getLine2() override { return nullptr; }
+    QGraphicsLineItem* getLine1() override { return line1; }
+    QGraphicsLineItem* getLine2() override { return line2; }
     double getArea() override;
     double getPerimeter() override;
     void setWidth(int newWidth) { width = newWidth; }
@@ -22,6 +22,8 @@ public:
 private:
     QGraphicsRectItem *rectangle;
     QGraphicsEllipseItem *centerOfMass;
+    QGraphicsLineItem *line1;
+    QGraphicsLineItem *line2;
     int width;
     int height;
 };
