@@ -2,6 +2,7 @@
 #include <QBrush>
 #include <QPolygonF>
 #include <cmath>
+#include <QPen>
 
 EightStar::EightStar(int eradius)
     : eradius(eradius)
@@ -18,12 +19,26 @@ EightStar::EightStar(int eradius)
 
     estar->setPos(-centerX, -centerY);
 
-    centerOfMass = new QGraphicsEllipseItem(0, 0, 10, 10, estar);
-    centerOfMass->setPos(centerX - 5, centerY - 5);
+    centerOfMass = new QGraphicsEllipseItem(0, 0, 0, 0, estar);
+    centerOfMass->setPos(centerX, centerY);
     centerOfMass->setBrush(QBrush(Qt::red));
     centerOfMass->hide();
 
     estar->setTransformOriginPoint(centerX, centerY);
+
+    QPen pen(Qt::red);
+    pen.setWidth(2);
+    double lineLength = 10;
+    line1 = new QGraphicsLineItem(centerX - lineLength / 2, centerY, centerX + lineLength / 2, centerY, estar);
+    line1->setPen(pen);
+    line2 = new QGraphicsLineItem(centerX, centerY - lineLength / 2, centerX, centerY + lineLength / 2, estar);
+    line2->setPen(pen);
+    QPen outlinePen(Qt::black);
+    outlinePen.setWidth(1);
+    line1->setPen(outlinePen);
+    line2->setPen(outlinePen);
+    line1->hide();
+    line2->hide();
 }
 
 QGraphicsPolygonItem* EightStar::getItem()

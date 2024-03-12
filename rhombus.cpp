@@ -1,6 +1,7 @@
 #include "rhombus.h"
 #include <QBrush>
 #include <QPolygonF>
+#include <QPen>
 #include <cmath>
 
 Rhombus::Rhombus(int diagonal1, int diagonal2)
@@ -15,13 +16,34 @@ Rhombus::Rhombus(int diagonal1, int diagonal2)
 
     rhombus->setPos(-centerX, -centerY);
 
-    centerOfMass = new QGraphicsEllipseItem(0, 0, 10, 10, rhombus);
-    centerOfMass->setPos(centerX - 5, centerY - 5);
+    centerOfMass = new QGraphicsEllipseItem(0, 0, 0, 0, rhombus);
+    centerOfMass->setPos(centerX, centerY);
     centerOfMass->setBrush(QBrush(Qt::red));
     centerOfMass->hide();
 
     rhombus->setTransformOriginPoint(centerX, centerY);
+
+    QPen pen(Qt::red);
+    pen.setWidth(2);
+
+    double lineLength = 10;
+
+    line1 = new QGraphicsLineItem(centerX - lineLength / 2, centerY, centerX + lineLength / 2, centerY, rhombus);
+    line1->setPen(pen);
+
+    line2 = new QGraphicsLineItem(centerX, centerY - lineLength / 2, centerX, centerY + lineLength / 2, rhombus);
+    line2->setPen(pen);
+
+    QPen outlinePen(Qt::black);
+    outlinePen.setWidth(1);
+
+    line1->setPen(outlinePen);
+    line2->setPen(outlinePen);
+
+    line1->hide();
+    line2->hide();
 }
+
 
 QGraphicsPolygonItem* Rhombus::getItem()
 {
