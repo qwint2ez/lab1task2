@@ -5,7 +5,6 @@
 
 //beuh
 
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -677,4 +676,24 @@ void MainWindow::on_movedown_released()
 timerMoveDown->stop();
 }
 
+
+
+void MainWindow::on_pushButton_clicked()
+{
+    if (!check) {
+        QMessageBox::information(this, tr("Ошибка"), tr("Сначала создайте фигуру!"));
+        return;
+    }
+    if (currentShape != nullptr) {
+        QGraphicsItem* item = currentShape->getItem();
+        ui->graphicsView->centerOn(item);
+    }
+}
+
+
+
+void MainWindow::on_pushButton_2_clicked()
+{
+        scene->clear();
+}
 

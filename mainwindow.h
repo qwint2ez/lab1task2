@@ -92,6 +92,10 @@ private slots:
 
     void on_ellipse_clicked();
 
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     Shape *currentShape;
