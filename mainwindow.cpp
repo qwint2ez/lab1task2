@@ -3,8 +3,6 @@
 #include <QInputDialog>
 #include <QTimer>
 
-//beuh
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -17,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     , sstar(new SixStar (0))
     , estar(new EightStar (0))
     , ell(new Ellipse(0, 0))
+    , drawnRect(nullptr)
 {
     ui->setupUi(this);
     this->setMinimumSize(760, 600);
@@ -67,17 +66,70 @@ MainWindow::~MainWindow()
     delete estar;
     delete ell;
     delete ui;
+    delete drawnRect;
 }
 
 bool check = false;
 
+void MainWindow::on_drawbutton_clicked()
+{
+    isDrawingEnabled = true;
+}
+
+void MainWindow::mousePressEvent(QMouseEvent *event)
+{
+    if (isDrawingEnabled) {
+        startPoint = event->pos();
+        endPoint = startPoint;
+        if (drawnRectangle != nullptr) {
+            scene->removeItem(drawnRectangle);
+            delete drawnRectangle;
+            drawnRectangle = nullptr;
+        }
+        drawnRectangle = scene->addRect(QRect(startPoint, endPoint));
+    }
+}
+
+void MainWindow::mouseMoveEvent(QMouseEvent *event)
+{
+    if (isDrawingEnabled && drawnRectangle != nullptr) {
+        endPoint = event->pos();
+        scene->removeItem(drawnRectangle);
+        drawnRectangle = scene->addRect(QRect(startPoint, endPoint));
+    }
+}
+
+void MainWindow::mouseReleaseEvent(QMouseEvent *event)
+{
+    if (isDrawingEnabled) {
+        endPoint = event->pos();
+        scene->removeItem(drawnRectangle);
+        drawnRectangle = scene->addRect(QRect(startPoint, endPoint));
+        if (drawnRect != nullptr) {
+            scene->removeItem(drawnRect->getItem());
+            delete drawnRect;
+            drawnRect = nullptr;
+        }
+        drawnRect = new DrawnRectangle(abs(endPoint.x() - startPoint.x()), abs(endPoint.y() - startPoint.y()));
+        scene->addItem(drawnRect->getItem());
+        isDrawingEnabled = false;
+    }
+}
+
 void MainWindow::on_rectangle_clicked()
 {
     bool ok;
-    width = QInputDialog::getInt(this, tr("Введите ширину"),
-                                 tr("Ширина:"), 100, 0, 1000, 1, &ok);
-    height = QInputDialog::getInt(this, tr("Введите высоту"),
-                                  tr("Высота:"), 200, 0, 1000, 1, &ok);
+    if (drawnRect != nullptr) {
+        width = QInputDialog::getInt(this, tr("Введите ширину"),
+                                     tr("Ширина:"), drawnRect->getWidth(), 0, 1000, 1, &ok);
+        height = QInputDialog::getInt(this, tr("Введите высоту"),
+                                      tr("Высота:"), drawnRect->getHeight(), 0, 1000, 1, &ok);
+    } else {
+        width = QInputDialog::getInt(this, tr("Введите ширину"),
+                                     tr("Ширина:"), 100, 0, 1000, 1, &ok);
+        height = QInputDialog::getInt(this, tr("Введите высоту"),
+                                      tr("Высота:"), 200, 0, 1000, 1, &ok);
+    }
 
     if (ok) {
         rect = new Rectangle(width, height);
@@ -696,4 +748,5 @@ void MainWindow::on_pushButton_2_clicked()
 {
         scene->clear();
 }
+
 

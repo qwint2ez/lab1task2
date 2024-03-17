@@ -5,6 +5,8 @@
 #include <QGraphicsScene>
 #include <QGraphicsRectItem>
 #include <QMessageBox>
+#include <QMouseEvent>
+#include "drawfigure.h"
 #include "rectangle.h"
 #include "triangle.h"
 #include "circle.h"
@@ -29,6 +31,9 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
 
 public slots:
     void updateCenterOfMass(double x, double y);
@@ -96,9 +101,10 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_drawbutton_clicked();
+
 private:
     Ui::MainWindow *ui;
-    QGraphicsScene* scene;
     Shape *currentShape;
     double width;
     double height;
@@ -123,6 +129,7 @@ private:
     SixStar* sstar;
     EightStar* estar;
     Ellipse* ell;
+    QGraphicsScene *scene;
     QTimer *timerClockwise;
     QTimer *timerCounterClockwise;
     QTimer *timerScaleUp;
@@ -133,6 +140,11 @@ private:
     QTimer *timerMoveLeft;
     QLabel* xLabel;
     QLabel* yLabel;
+    QPoint startPoint;
+    QPoint endPoint;
+    QGraphicsRectItem *drawnRectangle = nullptr;
+    DrawnRectangle *drawnRect = nullptr;
+    bool isDrawingEnabled = false;
 };
 
 #endif // MAINWINDOW_H

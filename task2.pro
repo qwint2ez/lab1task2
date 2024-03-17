@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     circle.cpp \
+    drawfigure.cpp \
     eightstar.cpp \
     ellipse.cpp \
     fivestar.cpp \
@@ -24,6 +25,7 @@ SOURCES += \
 
 HEADERS += \
     circle.h \
+    drawfigure.h \
     eightstar.h \
     ellipse.h \
     fivestar.h \
