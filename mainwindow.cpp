@@ -145,7 +145,7 @@ void MainWindow::on_rhombus_clicked()
         currentShape = rhom;
         check = true;
 
-        QGraphicsScene* scene = new QGraphicsScene(this);
+        scene = new QGraphicsScene(this);
 
         QGraphicsPolygonItem* rhombus = rhom->getItem();
 
@@ -176,7 +176,7 @@ void MainWindow::on_circle_clicked()
         currentShape = cir;
         check = true;
 
-        QGraphicsScene* scene = new QGraphicsScene(this);
+        scene = new QGraphicsScene(this);
 
         QGraphicsEllipseItem* circle = cir->getItem();
 
@@ -355,7 +355,7 @@ void MainWindow::on_ellipse_clicked()
         currentShape = ell;
         check = true;
 
-        QGraphicsScene* scene = new QGraphicsScene(this);
+        scene = new QGraphicsScene(this);
 
         QGraphicsEllipseItem* ellipse = ell->getItem();
 

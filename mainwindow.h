@@ -98,6 +98,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    QGraphicsScene* scene;
     Shape *currentShape;
     double width;
     double height;
@@ -122,7 +123,6 @@ private:
     SixStar* sstar;
     EightStar* estar;
     Ellipse* ell;
-    QGraphicsScene *scene;
     QTimer *timerClockwise;
     QTimer *timerCounterClockwise;
     QTimer *timerScaleUp;
