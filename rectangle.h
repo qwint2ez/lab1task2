@@ -4,11 +4,22 @@
 #include "shape.h"
 #include <QGraphicsRectItem>
 #include <QGraphicsEllipseItem>
+#include <QPainter>
 
 class Rectangle : public Shape
 {
 public:
     Rectangle(int width, int height);
+
+    QRectF boundingRect() const override
+    {
+        return QRectF(-width/2, -height/2, width, height);
+    }
+
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override
+    {
+        painter->drawRect(rectangle->rect());
+    }
 
     QGraphicsRectItem* getItem() override;
     QGraphicsEllipseItem* getCenterOfMass() override;

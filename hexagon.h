@@ -4,11 +4,22 @@
 #include "shape.h"
 #include <QGraphicsPolygonItem>
 #include <QGraphicsEllipseItem>
+#include <QPainter>
 
 class Hexagon : public Shape
 {
 public:
     Hexagon(int sideHexagon);
+
+    QRectF boundingRect() const override
+    {
+        return QRectF(-sideHexagon, -sideHexagon, 2*sideHexagon, 2*sideHexagon);
+    }
+
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override
+    {
+        painter->drawPolygon(hexagon->polygon());
+    }
 
     QGraphicsPolygonItem* getItem() override;
     QGraphicsEllipseItem* getCenterOfMass() override;

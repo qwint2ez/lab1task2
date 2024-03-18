@@ -4,11 +4,22 @@
 #include "shape.h"
 #include <QGraphicsPolygonItem>
 #include <QGraphicsEllipseItem>
+#include <QPainter>
 
 class SixStar : public Shape
 {
 public:
     SixStar(int sradius);
+
+    QRectF boundingRect() const override
+    {
+        return QRectF(-sradius, -sradius, 2*sradius, 2*sradius);
+    }
+
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override
+    {
+        painter->drawPolygon(sstar->polygon());
+    }
 
     QGraphicsPolygonItem* getItem() override;
     QGraphicsEllipseItem* getCenterOfMass() override;

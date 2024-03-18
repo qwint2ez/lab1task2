@@ -3,11 +3,22 @@
 
 #include "shape.h"
 #include <QGraphicsPolygonItem>
+#include <QPainter>
 
 class Rhombus : public Shape
 {
 public:
     Rhombus(int diagonal1, int diagonal2);
+
+    QRectF boundingRect() const override
+    {
+        return QRectF(-diagonal1/2, -diagonal2/2, diagonal1, diagonal2);
+    }
+
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override
+    {
+        painter->drawPolygon(rhombus->polygon());
+    }
 
     QGraphicsPolygonItem* getItem() override;
     QGraphicsEllipseItem* getCenterOfMass() override;

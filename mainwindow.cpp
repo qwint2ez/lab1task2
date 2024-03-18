@@ -74,6 +74,8 @@ bool check = false;
 void MainWindow::on_drawbutton_clicked()
 {
     isDrawingEnabled = true;
+    //scene = new QGraphicsScene(this);
+
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event)

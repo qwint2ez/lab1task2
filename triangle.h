@@ -3,12 +3,22 @@
 
 #include "shape.h"
 #include <QGraphicsPolygonItem>
-#include <QGraphicsEllipseItem>
+#include <QPainter>
 
 class Triangle : public Shape
 {
 public:
     Triangle(int side);
+
+    QRectF boundingRect() const override
+    {
+        return QRectF(-side/2, -sqrt(3)*side/2, side, sqrt(3)*side);
+    }
+
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override
+    {
+        painter->drawPolygon(triangle->polygon());
+    }
 
     QGraphicsPolygonItem* getItem() override;
     QGraphicsEllipseItem* getCenterOfMass() override;

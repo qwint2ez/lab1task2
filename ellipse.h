@@ -3,11 +3,22 @@
 
 #include "shape.h"
 #include <QGraphicsEllipseItem>
+#include <QPainter>
 
 class Ellipse : public Shape
 {
 public:
     Ellipse(int ewidth, int eheight);
+
+    QRectF boundingRect() const override
+    {
+        return QRectF(-ewidth/2, -eheight/2, ewidth, eheight);
+    }
+
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override
+    {
+        painter->drawEllipse(boundingRect());
+    }
 
     QGraphicsEllipseItem* getItem() override;
     QGraphicsEllipseItem* getCenterOfMass() override;

@@ -4,11 +4,23 @@
 #include "shape.h"
 #include <QGraphicsRectItem>
 #include <QGraphicsEllipseItem>
+#include <QPainter>
 
 class Square : public Shape
 {
 public:
     Square(int sideSquare);
+
+    QRectF boundingRect() const override
+    {
+        return QRectF(-sideSquare/2, -sideSquare/2, sideSquare, sideSquare);
+    }
+
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override
+    {
+        painter->drawRect(squareItem->rect());
+    }
+
 
     QGraphicsRectItem* getItem() override;
     QGraphicsEllipseItem* getCenterOfMass() override;
