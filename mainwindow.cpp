@@ -3,6 +3,8 @@
 #include <QInputDialog>
 #include <QTimer>
 
+// <3
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
